@@ -2,10 +2,10 @@
 
 A smple app to:
 
-• Create
-• Load
-• Edit
-• Delete
+* Create
+* Load
+* Edit
+* Delete
 
 workout plans (plan in ahead).
 
