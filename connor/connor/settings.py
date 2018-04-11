@@ -40,6 +40,9 @@ INSTALLED_APPS = [
 
     # local apps:
     'connor',
+
+    # 3rd party apps:
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
