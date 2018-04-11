@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.encoding import python_2_unicode_compatible
-# from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError
 
 
 @python_2_unicode_compatible
@@ -35,6 +35,12 @@ class WeekDay(models.Model):
 
     def __str__(self):
         return self.get_day_display()
+
+    def save(self, *args, **kwargs):
+        if WeekDay.objects.count() > 6:
+            raise ValidationError('Can only create 7 week day instances')
+
+        super(WeekDay, self).save(*args, **kwargs)
 
 
 @python_2_unicode_compatible
