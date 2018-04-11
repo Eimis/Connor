@@ -20,8 +20,7 @@ class WeekDay(models.Model):
         (7, 'Sunday'),
     )
 
-    day = models.CharField(
-        max_length=1,
+    day = models.PositiveIntegerField(
         choices=DAYS_OF_WEEK,
         # 1st day of the week:
         default=DAYS_OF_WEEK[0][0],
