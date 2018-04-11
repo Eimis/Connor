@@ -1,0 +1,24 @@
+{
+  "name": "Connor",
+  "homepage": "https://github.com/Eimis/Connor",
+  "authors": [
+    "Eimantas <eimantas.stonys@gmail.com>"
+  ],
+  "description": "A simple Workout planning app",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.0",
+    "angular-ui-router": "^1.0.15",
+    "oclazyload": "^1.1.0",
+    "components-font-awesome": "^5.0.6"
+  }
+}

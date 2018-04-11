@@ -20,8 +20,8 @@ Setup:
 * create a virtual environment `python3 -m venv virtualenv`
 * run `source virtual/bin/activate` to activate your fresh virtual environment
 * run `pip install -r requirements.txt` to install backend dependencies
+* run `bower install` to install frontend dependencies
 * run `cd connor/ && ./manage.py migrate` to run migrations (sqlite db is used)
-* run `./manage.py collectstatic`
 * `./manage.py runserver`
 * Visit http://localhost:8000
 
