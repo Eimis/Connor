@@ -36,6 +36,7 @@ class WeekDay(models.Model):
     def __str__(self):
         return self.get_day_display()
 
+    # TODO proper error message on Admin?
     def save(self, *args, **kwargs):
         if WeekDay.objects.count() > 6:
             raise ValidationError('Can only create 7 week day instances')

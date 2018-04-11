@@ -24,3 +24,9 @@ Setup:
 * run `./manage.py collectstatic`
 * `./manage.py runserver`
 * Visit http://localhost:8000
+
+Key points:
+
+* When migrations are ran:
+
+   * Initial Week days are created
