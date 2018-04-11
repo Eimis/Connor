@@ -30,3 +30,9 @@ Key points:
 * When migrations are ran:
 
    * Initial Week days are created
+
+* Important notes:
+
+   * The app is responsive and should work nicely on iPhones as well. Although,
+     for the scope of this task, the css is quite messy (because it's a free template
+     which was just modified)
