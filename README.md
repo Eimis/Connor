@@ -30,6 +30,11 @@ Key points:
 * When migrations are ran:
 
    * Initial Week days are created
+   * 3 initial `User`s are created:
+
+      * John Doe (login credentials: `john_doe / test`)
+      * Linda Doe (`linda_doe / test`)
+      * Matthew Doe (`matthew_doe / test`)
 
 * Important notes:
 
