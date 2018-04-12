@@ -13,8 +13,6 @@ class WorkoutPlan(models.Model):
         return self.name
 
 
-# TODO: data migration
-# TODO: limit to 7
 @python_2_unicode_compatible
 class WeekDay(models.Model):
     DAYS_OF_WEEK = (
@@ -49,6 +47,13 @@ class WorkoutExcercise(models.Model):
     name = models.CharField(max_length=30)
     days = models.ManyToManyField(WeekDay, blank=True)
     description = models.TextField()
+    workout_plan = models.ForeignKey(
+        WorkoutPlan,
+        null=True,
+        # we don't want to remove WorkoutPlans if an exercise is removed from
+        # the database:
+        on_delete=models.SET_NULL
+    )
 
     def __str__(self):
         return self.name
