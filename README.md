@@ -36,6 +36,8 @@ Key points:
       * Linda Doe (`linda_doe / test`)
       * Matthew Doe (`matthew_doe / test`)
    * 5 Initial Workout plans are created
+   * 4 of the plans are assigned to initial `Users`
+   * 20 Initial Workout excercises are created
 
 * Important notes:
 
