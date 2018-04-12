@@ -38,6 +38,8 @@ Key points:
    * 5 Initial Workout plans are created
    * 4 of the plans are assigned to initial `Users`
    * 20 Initial Workout excercises are created
+   * Week days are assigned randomly to Workout exercises
+   * Workout exercises are assigned randomly to Workout plans
 
 * Important notes:
 
