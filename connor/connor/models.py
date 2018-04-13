@@ -6,8 +6,7 @@ from django.core.exceptions import ValidationError
 
 @python_2_unicode_compatible
 class WorkoutPlan(models.Model):
-    # TODO: unique:
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     user = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
@@ -26,11 +25,11 @@ class WeekDay(models.Model):
         (7, 'Sunday'),
     )
 
-    # TODO: unique:
     day = models.PositiveIntegerField(
         choices=DAYS_OF_WEEK,
         # 1st day of the week:
         default=DAYS_OF_WEEK[0][0],
+        unique=True,
     )
 
     def __str__(self):
@@ -46,8 +45,7 @@ class WeekDay(models.Model):
 
 @python_2_unicode_compatible
 class WorkoutExcercise(models.Model):
-    # TODO: unique:
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
     days = models.ManyToManyField(
         WeekDay,
         blank=True,
