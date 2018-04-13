@@ -6,7 +6,10 @@ var workoutsController = function($rootScope, $scope, workoutsModel) {
   ctrl.model = workoutsModel;
 
   ctrl.$onInit = function() {
-    console.log('inited');
+    ctrl.model.listData().then(function(resp){
+      ctrl.workout_plans = resp.workout_plans;
+      console.log(ctrl.workout_plans);
+    });
   };
 
 };

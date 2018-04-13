@@ -216,6 +216,10 @@ tbody tr:hover {
   padding-left: 40px;
 }
 
+td.exercises {
+  padding: 10px 0 10px 0;
+}
+
 .column.description {
   padding: 15px 15px 15px 40px;
 }

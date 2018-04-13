@@ -19,18 +19,24 @@
     <tr class="table100-head">
       <th class="column">Workout plan</th>
       <th class="column">Assigned to</th>
-      <th class="column">Workout days</th>
-      <th class="column">Different exercises</th>
+      <th class="column">Exercises</th>
       <th class="column">Actions</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td class="column">xxx</td>
-      <td class="column">xxx</td>
-      <td class="column">xxx</td>
-      <td class="column">xxx</td>
-      <td class="column">xxx</td>
+    <tr ng-repeat="workout_plan in $ctrl.workout_plans">
+      <td class="column">{{ workout_plan.name || 'none' }}</td>
+      <td class="column">
+        <span ng-repeat="user in workout_plan.users">
+          {{ user.full_name }} {{ $last ? '' : ', ' }}
+        </span>
+      </td>
+      <td class="column exercises">
+        <span ng-repeat="exercise in workout_plan.workout_exercises">
+          {{ exercise.name }} {{ $last ? '' : ', ' }}
+        </span>
+      </td>
+      <td class="column">Edit</td>
     </tr>
   </tbody>
 </table>
