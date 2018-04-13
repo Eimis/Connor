@@ -6,6 +6,7 @@ from django.core.exceptions import ValidationError
 
 @python_2_unicode_compatible
 class WorkoutPlan(models.Model):
+    # TODO: unique:
     name = models.CharField(max_length=30)
     user = models.ManyToManyField(User, blank=True)
 
@@ -25,6 +26,7 @@ class WeekDay(models.Model):
         (7, 'Sunday'),
     )
 
+    # TODO: unique:
     day = models.PositiveIntegerField(
         choices=DAYS_OF_WEEK,
         # 1st day of the week:
@@ -44,16 +46,12 @@ class WeekDay(models.Model):
 
 @python_2_unicode_compatible
 class WorkoutExcercise(models.Model):
+    # TODO: unique:
     name = models.CharField(max_length=30)
     days = models.ManyToManyField(WeekDay, blank=True)
     description = models.TextField()
-    workout_plan = models.ForeignKey(
-        WorkoutPlan,
-        null=True,
-        # we don't want to remove WorkoutPlans if an exercise is removed from
-        # the database:
-        on_delete=models.SET_NULL
-    )
+    # FIXME: change to m2m ???
+    workout_plan = models.ManyToManyField(WorkoutPlan)
 
     def __str__(self):
         return self.name

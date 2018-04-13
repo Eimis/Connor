@@ -3,15 +3,8 @@ from django.contrib import admin
 from connor.models import WorkoutExcercise, WorkoutPlan
 
 
-class WorkoutExcerciseInline(admin.TabularInline):
-    model = WorkoutExcercise
-    extra = 0
-
-
 class WorkoutPlanAdmin(admin.ModelAdmin):
-    inlines = [
-        WorkoutExcerciseInline,
-    ]
+    pass
 
 
 class WorkoutExcerciseAdmin(admin.ModelAdmin):
