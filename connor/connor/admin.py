@@ -4,7 +4,7 @@ from connor.models import WorkoutExcercise, WorkoutPlan
 
 
 class WorkoutExcerciseInline(admin.TabularInline):
-    model = WorkoutExcercise.workout_plan.through
+    model = WorkoutExcercise.workout_plans.through
     extra = 0
 
 

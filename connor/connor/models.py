@@ -48,9 +48,16 @@ class WeekDay(models.Model):
 class WorkoutExcercise(models.Model):
     # TODO: unique:
     name = models.CharField(max_length=30)
-    days = models.ManyToManyField(WeekDay, blank=True)
+    days = models.ManyToManyField(
+        WeekDay,
+        blank=True,
+        related_name='workout_exercises'
+    )
     description = models.TextField()
-    workout_plan = models.ManyToManyField(WorkoutPlan)
+    workout_plans = models.ManyToManyField(
+        WorkoutPlan,
+        related_name='workout_exercises'
+    )
 
     def __str__(self):
         return self.name
