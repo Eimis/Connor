@@ -50,7 +50,6 @@ class WorkoutExcercise(models.Model):
     name = models.CharField(max_length=30)
     days = models.ManyToManyField(WeekDay, blank=True)
     description = models.TextField()
-    # FIXME: change to m2m ???
     workout_plan = models.ManyToManyField(WorkoutPlan)
 
     def __str__(self):
