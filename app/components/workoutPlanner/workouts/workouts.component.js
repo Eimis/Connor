@@ -40,8 +40,12 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     $ctrl.selected_exercises = selected_exercises;
 
     $ctrl.updateWorkoutPlan = function(workout_plan, users, workout_exercises) {
-      //console.log(workout_plan, workout_exercises)
+      $ctrl.errors = [];
+
       ctrl.model.submitData(workout_plan, users, workout_exercises).then(function(resp){
+        if (resp.errors) {
+          $ctrl.errors = resp.errors[$ctrl.workout_plan.pk];
+        }
         if (resp.ok) {
           $uibModalInstance.dismiss('cancel');
           syncData();
