@@ -47,14 +47,14 @@
       <div class="form-group">
         <label for="workoutPlanUsers">Users</label>
         <select id="workoutPlanUsers" class="form-control" multiple
-          ng-options="item.pk as item.full_name for item in $ctrl.workout_plan.all_users"
+          ng-options="item.pk as item.full_name for item in $ctrl.all_users"
           ng-model="$ctrl.selected_users">
         </select>
       </div>
       <div class="form-group">
         <label for="workoutPlanExercises">Exercises</label>
         <select id="workoutPlanExercises" class="form-control" multiple
-          ng-options="item.pk as item.name for item in $ctrl.workout_plan.all_exercises"
+          ng-options="item.pk as item.name for item in $ctrl.all_exercises"
           ng-model="$ctrl.selected_exercises">
         </select>
       </div>
@@ -84,14 +84,14 @@
       <div class="form-group">
         <label for="workoutPlanUsers">Users</label>
         <select id="workoutPlanUsers" class="form-control" multiple
-          ng-options="item.pk as item.full_name for item in $ctrl.workout_plan.all_users"
+          ng-options="item.pk as item.full_name for item in $ctrl.all_users"
           ng-model="$ctrl.selected_users">
         </select>
       </div>
       <div class="form-group">
         <label for="workoutPlanExercises">Exercises</label>
         <select id="workoutPlanExercises" class="form-control" multiple
-          ng-options="item.pk as item.name for item in $ctrl.workout_plan.all_exercises"
+          ng-options="item.pk as item.name for item in $ctrl.all_exercises"
           ng-model="$ctrl.selected_exercises">
         </select>
       </div>

@@ -1,9 +1,12 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render
 
 from connor.models import WorkoutExcercise, WorkoutPlan
-from connor.serializers import WorkoutPlanSerializer
+from connor.serializers import WorkoutPlanSerializer, UserSerializer, \
+    WorkoutExcerciseSerializer
 
 from rest_framework import generics
+from rest_framework import views
 from rest_framework.response import Response
 
 
@@ -78,3 +81,34 @@ class CreateWorkoutPlanView(generics.CreateAPIView):
 
     queryset = WorkoutPlan.objects.all()
     serializer_class = WorkoutPlanSerializer
+
+
+class ExtraDataView(views.APIView):
+    """
+    View to get extra data for frontend.
+
+    * Requires no authentication
+    * Requires no special permissions
+
+    * Returns a list of all available Users
+    * Returns a list of all available WorkoutExcercises
+    """
+    queryset = WorkoutPlan.objects.all()
+    serializer_class = WorkoutPlanSerializer
+
+    http_method_names = ['get', ]
+
+    def get(self, request):
+        all_users = User.objects.all()
+        all_exercises = WorkoutExcercise.objects.all()
+
+        user_serializer = UserSerializer(all_users, many=True)
+        exercise_serializer = WorkoutExcerciseSerializer(
+            all_exercises,
+            many=True
+        )
+
+        return Response({
+            'all_users': user_serializer.data,
+            'all_exercises': exercise_serializer.data,
+        })

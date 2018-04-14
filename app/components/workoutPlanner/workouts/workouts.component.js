@@ -6,6 +6,12 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
   ctrl.model = workoutsModel;
 
   ctrl.$onInit = function() {
+    ctrl.model.getExtraData().then(function(resp){
+      $scope.all_exercises = resp.all_exercises;
+      $scope.all_users = resp.all_users;
+      console.log($scope.all_users)
+    });
+
     syncData();
   };
 
@@ -19,6 +25,10 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     var $ctrl = this;
 
     $ctrl.workout_plan = workout_plan;
+
+    //This comes from 'extra_data/' api endpoint:
+    $ctrl.all_users = $scope.all_users;
+    $ctrl.all_exercises = $scope.all_exercises;
 
     //copy data for resetting it if modal was closed:
     var original_workout_plan = angular.copy($ctrl.workout_plan);
@@ -63,6 +73,7 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
   var workoutPlanCreateModalController = function($scope, $uibModalInstance) {
     var $ctrl = this;
     $ctrl.workout_plan = {};
+    $ctrl.workout_plans = $scope.workout_plans;
 
     $ctrl.createWorkoutPlan = function(workout_plan) {
       $ctrl.errors = [];

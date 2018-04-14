@@ -103,10 +103,33 @@ angular.module('workoutPlanner')
         });
     }
 
+    //A method to get extra data for workout plans (all available users and
+    //exercises):
+    function getExtraData() {
+
+      var config = {
+        headers: {
+          'Accept': 'application/json'
+        },
+      };
+
+      return $http.get('/workout_plans/extra_data', config)
+        .then(function(response) {
+          var extra_data = angular.fromJson(response.data);
+
+          return {
+            all_users: extra_data.all_users,
+            all_exercises: extra_data.all_exercises,
+          };
+        })
+        .catch(function(response) {});
+    }
+
     return {
       listData: listData,
       submitData: submitData,
       removeData: removeData,
       createData: createData,
+      getExtraData: getExtraData,
     };
   });
