@@ -60,6 +60,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('connor', '0006_create_initial_workout_plans'),
+        ('connor', '0015_auto_20180413_1707'),
     ]
 
     operations = [
