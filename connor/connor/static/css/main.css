@@ -220,12 +220,20 @@ td.exercises {
   padding: 10px 0 10px 40px;
 }
 
-span.edit {
+span.edit,
+span.delete {
   padding: 5px;
 }
-span.edit:hover {
+
+span.edit:hover,
+span.delete:hover {
   cursor: pointer;
 }
+
+span.delete {
+  margin-left: 5px;
+}
+
 small.error {
   color: red;
   padding-left: 6px;

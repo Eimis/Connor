@@ -54,3 +54,15 @@ class UpdateWorkoutPlanView(generics.UpdateAPIView):
             return Response(status=200, data=serializer.data)
         else:
             return Response({pk: serializer.errors}, status=400)
+
+
+class RemoveWorkoutPlanView(generics.DestroyAPIView):
+    """
+    View to remove workout plan.
+
+    * Requires no authentication
+    * Requires no special permissions
+    """
+
+    queryset = WorkoutPlan.objects.all()
+    serializer_class = WorkoutPlanSerializer

@@ -13,7 +13,7 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     ctrl.model.listData().then(function(resp){
       ctrl.workout_plans = resp.workout_plans;
     });
-  }
+  };
 
   var workoutPlanEditModalController = function($scope, $uibModalInstance, workout_plan) {
     var $ctrl = this;
@@ -85,6 +85,12 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
       //console.log('clicked OK')
     }, function() {
       //console.log('clicked CANCEL')
+    });
+  };
+
+  ctrl.removeWorkoutPlan = function(workout_plan) {
+    ctrl.model.removeData(workout_plan).then(function(resp){
+      syncData();
     });
   };
 

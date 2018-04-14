@@ -2,7 +2,8 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
 
-from connor.views import ListWorkoutPlansView, main, UpdateWorkoutPlanView
+from connor.views import ListWorkoutPlansView, main, RemoveWorkoutPlanView, \
+    UpdateWorkoutPlanView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -15,6 +16,11 @@ urlpatterns = [
     url(
         r'^workout_plans/(?P<pk>\d+)/update$',
         UpdateWorkoutPlanView.as_view(),
-        name='update_issue'
+        name='update_workout_plan'
+    ),
+    url(
+        r'^workout_plans/(?P<pk>\d+)/remove$',
+        RemoveWorkoutPlanView.as_view(),
+        name='update_workout_plan'
     ),
 ]

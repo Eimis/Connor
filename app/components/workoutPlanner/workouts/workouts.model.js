@@ -21,6 +21,7 @@ angular.module('workoutPlanner')
         .catch(function(response) {});
     }
 
+    //A method to edit workout plan instance:
     function submitData(workout_plan, users, workout_exercises) {
 
       var config = {
@@ -60,9 +61,27 @@ angular.module('workoutPlanner')
         });
     }
 
+    //A method to remove workout plan instance:
+    function removeData(workout_plan) {
+
+      var config = {
+        headers: {
+          'Accept': 'application/json'
+        },
+      };
+
+      return $http.delete('/workout_plans/' + workout_plan.pk + '/remove', config)
+        .then(function(response) {
+          return {'ok': true};
+        })
+        .catch(function(response) {
+          return {'errors': response.data};
+        });
+    }
+
     return {
       listData: listData,
       submitData: submitData,
-      //getStats: getStats,
+      removeData: removeData,
     };
   });
