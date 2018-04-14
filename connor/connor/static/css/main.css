@@ -226,12 +226,20 @@ span.delete {
 }
 
 span.edit:hover,
-span.delete:hover {
+span.delete:hover,
+span.create:hover {
   cursor: pointer;
 }
 
 span.delete {
   margin-left: 5px;
+}
+
+span.create {
+  margin-bottom: 15px;
+  float: right;
+  font-size:15px;
+  padding: 10px;
 }
 
 small.error {

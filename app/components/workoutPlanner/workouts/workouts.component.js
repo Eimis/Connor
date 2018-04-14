@@ -60,6 +60,29 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     };
   };
 
+  var workoutPlanCreateModalController = function($scope, $uibModalInstance) {
+    var $ctrl = this;
+    $ctrl.workout_plan = {};
+
+    $ctrl.createWorkoutPlan = function(workout_plan) {
+      $ctrl.errors = [];
+
+      ctrl.model.createData($ctrl.workout_plan).then(function(resp){
+        if (resp.errors) {
+          $ctrl.errors = resp.errors;
+        }
+        if (resp.ok) {
+          $uibModalInstance.dismiss('cancel');
+          syncData();
+        }
+      });
+    };
+
+    $ctrl.cancel = function() {
+      $uibModalInstance.dismiss('cancel');
+    };
+  };
+
   ctrl.openWorkoutPlanEditModal = function(workout_plan) {
     var parentElem = angular.element(document).find('body');
 
@@ -91,6 +114,28 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
   ctrl.removeWorkoutPlan = function(workout_plan) {
     ctrl.model.removeData(workout_plan).then(function(resp){
       syncData();
+    });
+  };
+
+  ctrl.openWorkoutPlanCreateModal = function() {
+    var parentElem = angular.element(document).find('body');
+
+    var editModalInstance = $uibModal.open({
+      animation: true,
+      keyboard: false,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'workoutPlanCreateModalContent.html',
+      controller: workoutPlanCreateModalController,
+      scope: $scope, //passed current scope to the modal
+      controllerAs: '$ctrl',
+      appendTo: parentElem,
+    });
+
+    editModalInstance.result.then(function() {
+      //console.log('clicked OK')
+    }, function() {
+      //console.log('clicked CANCEL')
     });
   };
 

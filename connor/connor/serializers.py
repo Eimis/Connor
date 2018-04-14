@@ -31,10 +31,8 @@ class WorkoutExcerciseSerializer(serializers.ModelSerializer):
 
 
 class WorkoutPlanSerializer(serializers.ModelSerializer):
-    users = UserSerializer(many=True)
-    workout_exercises = WorkoutExcerciseSerializer(many=True, context={
-        'all_exercises': WorkoutExcercise.objects.all()
-    })
+    users = UserSerializer(many=True, required=False)
+    workout_exercises = WorkoutExcerciseSerializer(many=True, required=False)
     all_exercises = serializers.SerializerMethodField()
     all_users = serializers.SerializerMethodField()
 

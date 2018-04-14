@@ -1,18 +1,4 @@
-<!--<div class="stats-wrapper">-->
-  <!--<div>-->
-    <!--<h4>some info: </h4>-->
-    <!--<span>-->
-      <!--some info-->
-    <!--</span>-->
-  <!--</div>-->
-<!--</div>-->
-
-<!--<div class="general-errors-wrapper">-->
-  <!--<span class="fas fa-exclamation-triangle"></span>-->
-  <!--<span class="general_errors">-->
-    <!--error-->
-  <!--</span>-->
-<!--</div>-->
+<span class="label label-info create" ng-click="$ctrl.openWorkoutPlanCreateModal()">create <i class="fas fa-plus"></i></span>
 
 <table class="workouts">
   <thead>
@@ -53,14 +39,14 @@
     <form>
       <div class="form-group">
         <label for="workoutPlanName">Name</label>
-        <input type="text" class="form-control" id="workoutPlanName" placeholder="Plan name" ng-model="$ctrl.workout_plan.name">
+        <input type="text" class="form-control" id="workoutPlanName" placeholder="Plan name" ng-model="$ctrl.workout_plan.name" autofocus="true">
         <small class="form-text text-muted error" ng-repeat="error in $ctrl.errors.name">
           {{ error }} {{ $last ? '' : ', ' }}
         </small>
       </div>
       <div class="form-group">
         <label for="workoutPlanUsers">Users</label>
-        <select id="workoutPlanUsers" class="form-control" multiple autofocus="true"
+        <select id="workoutPlanUsers" class="form-control" multiple
           ng-options="item.pk as item.full_name for item in $ctrl.workout_plan.all_users"
           ng-model="$ctrl.selected_users">
         </select>
@@ -77,6 +63,43 @@
   </div>  <!--/modal body-->
   <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="$ctrl.updateWorkoutPlan($ctrl.workout_plan, $ctrl.selected_users, $ctrl.selected_exercises)">Save</button>
+    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="workoutPlanCreateModalContent.html">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">Create Workout Plan</h3>
+  </div>
+  <div class="modal-body" id="modal-body">
+
+    <form>
+      <div class="form-group">
+        <label for="workoutPlanName">Name</label>
+        <input type="text" class="form-control" id="workoutPlanName" placeholder="Plan name" ng-model="$ctrl.workout_plan.name" autofocus="true">
+        <small class="form-text text-muted error" ng-repeat="error in $ctrl.errors.name">
+          {{ error }} {{ $last ? '' : ', ' }}
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="workoutPlanUsers">Users</label>
+        <select id="workoutPlanUsers" class="form-control" multiple
+          ng-options="item.pk as item.full_name for item in $ctrl.workout_plan.all_users"
+          ng-model="$ctrl.selected_users">
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="workoutPlanExercises">Exercises</label>
+        <select id="workoutPlanExercises" class="form-control" multiple
+          ng-options="item.pk as item.name for item in $ctrl.workout_plan.all_exercises"
+          ng-model="$ctrl.selected_exercises">
+        </select>
+      </div>
+    </form>
+
+  </div>  <!--/modal body-->
+  <div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.createWorkoutPlan()">Create</button>
     <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
   </div>
 </script>

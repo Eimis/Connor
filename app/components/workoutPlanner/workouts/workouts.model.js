@@ -79,9 +79,34 @@ angular.module('workoutPlanner')
         });
     }
 
+    //A method to remove workout plan instance:
+    function createData(workout_plan) {
+
+      var config = {
+        headers: {
+          'Accept': 'application/json'
+        },
+      };
+
+      var data = {
+        name: workout_plan.name,
+        //workout_exercises: updated_exercises,
+        //users: updated_users,
+      };
+
+      return $http.post('/workout_plans/create', data, config)
+        .then(function(response) {
+          return {'ok': true};
+        })
+        .catch(function(response) {
+          return {'errors': response.data};
+        });
+    }
+
     return {
       listData: listData,
       submitData: submitData,
       removeData: removeData,
+      createData: createData,
     };
   });

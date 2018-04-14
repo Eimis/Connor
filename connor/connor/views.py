@@ -66,3 +66,15 @@ class RemoveWorkoutPlanView(generics.DestroyAPIView):
 
     queryset = WorkoutPlan.objects.all()
     serializer_class = WorkoutPlanSerializer
+
+
+class CreateWorkoutPlanView(generics.CreateAPIView):
+    """
+    View to create workout plan.
+
+    * Requires no authentication
+    * Requires no special permissions
+    """
+
+    queryset = WorkoutPlan.objects.all()
+    serializer_class = WorkoutPlanSerializer
