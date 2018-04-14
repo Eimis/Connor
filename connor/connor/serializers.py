@@ -36,6 +36,7 @@ class WorkoutPlanSerializer(serializers.ModelSerializer):
         'all_exercises': WorkoutExcercise.objects.all()
     })
     all_exercises = serializers.SerializerMethodField()
+    all_users = serializers.SerializerMethodField()
 
     class Meta:
         model = WorkoutPlan
@@ -43,6 +44,7 @@ class WorkoutPlanSerializer(serializers.ModelSerializer):
             'pk',
             'name',
             'users',
+            'all_users',
             'workout_exercises',
             'all_exercises',
         )
@@ -52,6 +54,11 @@ class WorkoutPlanSerializer(serializers.ModelSerializer):
 
         return WorkoutExcerciseSerializer(all_exercises, many=True).data
 
+    def get_all_users(self, obj):
+        all_users = User.objects.all().order_by('first_name')
+
+        return UserSerializer(all_users, many=True).data
+
     # because of complex m2m relationships, we have to override this method,
     # see: http://www.django-rest-framework.org/api-guide/serializers/#writing-update-methods-for-nested-representations  # NOQA: E501
     def update(self, instance, validated_data):
@@ -60,6 +67,24 @@ class WorkoutPlanSerializer(serializers.ModelSerializer):
         # returns True. This is safe, because is_valid() has already been
         # called and because of the scope of this task, we're leaving this as
         # a FIXME:
+
+        users_valid = self.is_valid() and not all(
+            x for x in self.validated_data['users']
+        )
+
+        if users_valid:
+            posted_users = [
+                x['pk'] for x in self.initial_data['users']
+            ]
+            existing_users = [
+                x.pk for x in instance.users.all()
+            ]
+
+            for eu in existing_users:
+                if eu not in posted_users:
+                    instance.users.remove(eu)
+
+            instance.users.add(*posted_users)
 
         exercises_valid = self.is_valid() and not all(
             x for x in self.validated_data['workout_exercises']

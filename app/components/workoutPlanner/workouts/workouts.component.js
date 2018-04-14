@@ -23,6 +23,14 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     //copy data for resetting it if modal was closed:
     var original_workout_plan = angular.copy($ctrl.workout_plan);
 
+    //Initial users:
+    var selected_users = [];
+    for (var key in workout_plan.users) {
+      var e = workout_plan.all_users[key];
+      selected_users.push(e.pk);
+    }
+    $ctrl.selected_users = selected_users;
+
     //Initial exercises:
     var selected_exercises = [];
     for (var key in workout_plan.workout_exercises) {
@@ -31,9 +39,9 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     }
     $ctrl.selected_exercises = selected_exercises;
 
-    $ctrl.updateWorkoutPlan = function(workout_plan, workout_exercises) {
+    $ctrl.updateWorkoutPlan = function(workout_plan, users, workout_exercises) {
       //console.log(workout_plan, workout_exercises)
-      ctrl.model.submitData(workout_plan, workout_exercises).then(function(resp){
+      ctrl.model.submitData(workout_plan, users, workout_exercises).then(function(resp){
         if (resp.ok) {
           $uibModalInstance.dismiss('cancel');
           syncData();

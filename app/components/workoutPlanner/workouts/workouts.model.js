@@ -21,7 +21,7 @@ angular.module('workoutPlanner')
         .catch(function(response) {});
     }
 
-    function submitData(workout_plan, workout_exercises) {
+    function submitData(workout_plan, users, workout_exercises) {
 
       var config = {
         headers: {
@@ -29,6 +29,15 @@ angular.module('workoutPlanner')
         },
       };
 
+      //m2m users:
+      var updated_users = [];
+      for (var i = 0; i < users.length; i++) {
+        var user_pk = users[i];
+
+        updated_users.push({'pk': user_pk});
+      }
+
+      //m2m exercises:
       var updated_exercises = [];
       for (var i = 0; i < workout_exercises.length; i++) {
         var exercise_pk = workout_exercises[i];
@@ -39,6 +48,7 @@ angular.module('workoutPlanner')
       var data = {
         name: workout_plan.name,
         workout_exercises: updated_exercises,
+        users: updated_users,
       };
 
       return $http.patch('/workout_plans/' + workout_plan.pk + '/update', data, config)
