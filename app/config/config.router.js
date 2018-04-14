@@ -1,4 +1,4 @@
-var myApp = angular.module('workoutPlanner', ['ui.router', 'oc.lazyLoad', ]);
+var myApp = angular.module('workoutPlanner', ['ui.router', 'oc.lazyLoad', 'ui.bootstrap', ]);
 
 myApp.config(function($stateProvider, $httpProvider) {
 

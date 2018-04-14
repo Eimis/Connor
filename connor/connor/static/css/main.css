@@ -220,17 +220,11 @@ td.exercises {
   padding: 10px 0 10px 0;
 }
 
-.column.description {
-  padding: 15px 15px 15px 40px;
+span.edit {
+  padding: 5px;
 }
-.mark-solved {
-  padding: 10px;
-}
-.mark-solved:hover {
+span.edit:hover {
   cursor: pointer;
-}
-.mark-solved i {
-  padding-left: 10px;
 }
 
 @media screen and (max-width: 992px) {

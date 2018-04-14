@@ -21,9 +21,38 @@ angular.module('workoutPlanner')
         .catch(function(response) {});
     }
 
+    function submitData(workout_plan, workout_exercises) {
+
+      var config = {
+        headers: {
+          'Accept': 'application/json'
+        },
+      };
+
+      var updated_exercises = [];
+      for (var i = 0; i < workout_exercises.length; i++) {
+        var exercise_pk = workout_exercises[i];
+
+        updated_exercises.push({'pk': exercise_pk});
+      }
+
+      var data = {
+        name: workout_plan.name,
+        workout_exercises: updated_exercises,
+      };
+
+      return $http.patch('/workout_plans/' + workout_plan.pk + '/update', data, config)
+        .then(function(response) {
+          return {'ok': true};
+        })
+        .catch(function(response) {
+          return {'errors': response.data};
+        });
+    }
+
     return {
       listData: listData,
-      //submitData: submitData,
+      submitData: submitData,
       //getStats: getStats,
     };
   });
