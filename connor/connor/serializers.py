@@ -61,21 +61,26 @@ class WorkoutPlanSerializer(serializers.ModelSerializer):
 
     # because of complex m2m relationships, we have to override this method,
     # see: http://www.django-rest-framework.org/api-guide/serializers/#writing-update-methods-for-nested-representations  # NOQA: E501
+    # TODO: separate methods?
     def update(self, instance, validated_data):
+
+        # shortcut to clear m2m relationships if no data was posted:
+        posted_users = [
+            x['pk'] for x in self.initial_data['users']
+        ]
+        if not posted_users:
+            instance.users.clear()
+
         # XXX: for some reason while updating complex m2m relationships, DRF
         # is returning empty dictionary for validated_data, although is_valid()
         # returns True. This is safe, because is_valid() has already been
         # called and because of the scope of this task, we're leaving this as
         # a FIXME:
-
-        users_valid = self.is_valid() and not all(
-            x for x in self.validated_data['users']
-        )
+        users_valid = self.is_valid() and not all([
+            bool(x) for x in self.validated_data['users']
+        ])
 
         if users_valid:
-            posted_users = [
-                x['pk'] for x in self.initial_data['users']
-            ]
             existing_users = [
                 x.pk for x in instance.users.all()
             ]
@@ -86,14 +91,18 @@ class WorkoutPlanSerializer(serializers.ModelSerializer):
 
             instance.users.add(*posted_users)
 
-        exercises_valid = self.is_valid() and not all(
-            x for x in self.validated_data['workout_exercises']
-        )
+        # shortcut to clear m2m relationships if no data was posted:
+        posted_exercises = [
+            x['pk'] for x in self.initial_data['workout_exercises']
+        ]
+        if not posted_exercises:
+            instance.workout_exercises.clear()
+
+        exercises_valid = self.is_valid() and not all([
+            bool(x) for x in self.validated_data['workout_exercises']
+        ])
 
         if exercises_valid:
-            posted_exercises = [
-                x['pk'] for x in self.initial_data['workout_exercises']
-            ]
             existing_exercises = [
                 x.pk for x in instance.workout_exercises.all()
             ]
