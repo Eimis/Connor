@@ -35,7 +35,7 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     //Initial users:
     var selected_users = [];
     for (var key in workout_plan.users) {
-      var e = workout_plan.all_users[key];
+      var e = $scope.all_users[key];
       selected_users.push(e.pk);
     }
     $ctrl.selected_users = selected_users;
@@ -43,7 +43,7 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     //Initial exercises:
     var selected_exercises = [];
     for (var key in workout_plan.workout_exercises) {
-      var e = workout_plan.workout_exercises[key];
+      var e = $scope.all_exercises[key];
       selected_exercises.push(e.pk);
     }
     $ctrl.selected_exercises = selected_exercises;

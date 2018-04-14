@@ -38,8 +38,6 @@ class WorkoutExcerciseSerializer(serializers.ModelSerializer):
 class WorkoutPlanSerializer(serializers.ModelSerializer):
     users = UserSerializer(many=True, required=False)
     workout_exercises = WorkoutExcerciseSerializer(many=True, required=False)
-    all_exercises = serializers.SerializerMethodField()
-    all_users = serializers.SerializerMethodField()
 
     class Meta:
         model = WorkoutPlan
@@ -47,24 +45,11 @@ class WorkoutPlanSerializer(serializers.ModelSerializer):
             'pk',
             'name',
             'users',
-            'all_users',
             'workout_exercises',
-            'all_exercises',
         )
-
-    def get_all_exercises(self, obj):
-        all_exercises = WorkoutExcercise.objects.all().order_by('name')
-
-        return WorkoutExcerciseSerializer(all_exercises, many=True).data
-
-    def get_all_users(self, obj):
-        all_users = User.objects.all().order_by('first_name')
-
-        return UserSerializer(all_users, many=True).data
 
     # because of complex m2m relationships, we have to override this method,
     # see: http://www.django-rest-framework.org/api-guide/serializers/#writing-update-methods-for-nested-representations  # NOQA: E501
-    # TODO: separate methods?
     def update(self, instance, validated_data):
 
         # shortcut to clear m2m relationships if no data was posted:
