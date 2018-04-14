@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 
 @python_2_unicode_compatible
 class WorkoutPlan(models.Model):
-    name = models.CharField(max_length=30, unique=True)
+    name = models.CharField(max_length=100, unique=True)
     users = models.ManyToManyField(User, blank=True)
 
     def __str__(self):
