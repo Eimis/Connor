@@ -20,6 +20,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class WorkoutExcerciseSerializer(serializers.ModelSerializer):
+    # XXX: if we would want to implement WorkoutExcercise editing, this
+    # should be set to required=True, because this is required on a
+    # dabase level:
+    name = serializers.CharField(required=False)
+    description = serializers.CharField(required=False)
 
     class Meta:
         model = WorkoutExcercise
@@ -116,3 +121,24 @@ class WorkoutPlanSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+    # because of complex m2m relationships, we have to override this method,
+    # see: http://www.django-rest-framework.org/api-guide/serializers/#writing-update-methods-for-nested-representations  # NOQA: E501
+    def create(self, validated_data):
+
+        workout_plan = WorkoutPlan.objects.create(
+            name=validated_data['name'],
+        )
+
+        posted_users = [
+            x['pk'] for x in self.initial_data['users']
+        ]
+        posted_exercises = [
+            x['pk'] for x in self.initial_data['workout_exercises']
+        ]
+        workout_plan.users.add(*posted_users)
+        workout_plan.workout_exercises.add(*posted_exercises)
+
+        workout_plan.save()
+
+        return workout_plan

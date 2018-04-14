@@ -9,7 +9,6 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     ctrl.model.getExtraData().then(function(resp){
       $scope.all_exercises = resp.all_exercises;
       $scope.all_users = resp.all_users;
-      console.log($scope.all_users)
     });
 
     syncData();
@@ -72,10 +71,14 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
 
   var workoutPlanCreateModalController = function($scope, $uibModalInstance) {
     var $ctrl = this;
-    $ctrl.workout_plan = {};
-    $ctrl.workout_plans = $scope.workout_plans;
 
-    $ctrl.createWorkoutPlan = function(workout_plan) {
+    //This comes from 'extra_data/' api endpoint:
+    $ctrl.all_users = $scope.all_users;
+    $ctrl.all_exercises = $scope.all_exercises;
+
+    $ctrl.workout_plan = {};
+
+    $ctrl.createWorkoutPlan = function() {
       $ctrl.errors = [];
 
       ctrl.model.createData($ctrl.workout_plan).then(function(resp){

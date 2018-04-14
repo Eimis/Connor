@@ -88,10 +88,32 @@ angular.module('workoutPlanner')
         },
       };
 
+      //m2m users:
+      var assigned_users = [];
+      if (!workout_plan.users) {
+        workout_plan.users = [];
+      }
+      for (var i = 0; i < workout_plan.users.length; i++) {
+        var user_pk = workout_plan.users[i];
+
+        assigned_users.push({'pk': user_pk});
+      }
+
+      //m2m exercises:
+      var assigned_exercises = [];
+      if (!workout_plan.workout_exercises) {
+        workout_plan.workout_exercises = [];
+      }
+      for (var i = 0; i < workout_plan.workout_exercises.length; i++) {
+        var exercise_pk = workout_plan.workout_exercises[i];
+
+        assigned_exercises.push({'pk': exercise_pk});
+      }
+
       var data = {
         name: workout_plan.name,
-        //workout_exercises: updated_exercises,
-        //users: updated_users,
+        workout_exercises: assigned_exercises,
+        users: assigned_users,
       };
 
       return $http.post('/workout_plans/create', data, config)
