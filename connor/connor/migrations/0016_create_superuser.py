@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
             is_superuser=True,
         )
         su.set_password(SUPERUSER_PASSWORD)
+        su.save()
 
         print('\nCreated initial superuser account: {0} / {1}'.format(
             su.username, SUPERUSER_PASSWORD
