@@ -36,9 +36,9 @@ class WorkoutExcerciseSerializer(serializers.ModelSerializer):
     # XXX: if we would want to implement WorkoutExcercise editing, this
     # should be set to required=True, because this is required on a
     # dabase level:
-    name = serializers.CharField()
-    description = serializers.CharField()
-    days = WeekDaySerializer(many=True)
+    name = serializers.CharField(required=False)
+    description = serializers.CharField(required=False)
+    days = WeekDaySerializer(many=True, required=False)
 
     class Meta:
         model = WorkoutExcercise
