@@ -20,11 +20,11 @@ Setup:
 
 * Clone this repo
 * create a virtual environment `python3 -m venv virtualenv`
-* run `source virtual/bin/activate` to activate your fresh virtual environment
-* run `pip install -r requirements.txt` to install backend dependencies
+* run `source virtualenv/bin/activate` to activate your fresh virtual environment
+* run `cd Connor && pip install -r requirements.txt` to install backend dependencies
 * run `bower install` to install frontend dependencies
 * run `cd connor/ && ./manage.py migrate` to run migrations (sqlite db is used)
-* `./manage.py runserver`
+* run `./manage.py runserver`
 * Visit http://localhost:8000/#/ (don't forget the # character!)
 
 Key points:
