@@ -23,7 +23,7 @@ Setup:
 * run `bower install` to install frontend dependencies
 * run `cd connor/ && ./manage.py migrate` to run migrations (sqlite db is used)
 * `./manage.py runserver`
-* Visit http://localhost:8000
+* Visit http://localhost:8000/#/ (don't forget the # character!)
 
 Key points:
 
@@ -35,6 +35,7 @@ Key points:
       * John Doe (login credentials: `john_doe / test`)
       * Linda Doe (`linda_doe / test`)
       * Matthew Doe (`matthew_doe / test`)
+   * 1 initial `superuser` account is created, login credentials: `superuser / superuser`:
    * 5 Initial Workout plans are created
    * 4 of the plans are assigned to initial `Users`
    * 20 Initial Workout excercises are created
