@@ -83,3 +83,4 @@ Key points:
      for the scope of this task, the css is quite messy (because it's a free template
      which was just modified)
    * TODO: ability to edit exercise info via app's interface (not Django admin)
+   * Auth
