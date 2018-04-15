@@ -23,8 +23,8 @@ class WorkoutExcerciseSerializer(serializers.ModelSerializer):
     # XXX: if we would want to implement WorkoutExcercise editing, this
     # should be set to required=True, because this is required on a
     # dabase level:
-    name = serializers.CharField(required=False)
-    description = serializers.CharField(required=False)
+    name = serializers.CharField()
+    description = serializers.CharField()
 
     class Meta:
         model = WorkoutExcercise
@@ -36,8 +36,8 @@ class WorkoutExcerciseSerializer(serializers.ModelSerializer):
 
 
 class WorkoutPlanSerializer(serializers.ModelSerializer):
-    users = UserSerializer(many=True, required=False)
-    workout_exercises = WorkoutExcerciseSerializer(many=True, required=False)
+    users = UserSerializer(many=True)
+    workout_exercises = WorkoutExcerciseSerializer(many=True)
 
     class Meta:
         model = WorkoutPlan
