@@ -73,6 +73,10 @@ Key points:
    days)
    * At this point no API endpoint requires authentication
 
+* Tests:
+
+   * To run some basic tests, run `./manage.py test`
+
 * Side notes / TODOs:
 
    * The app is responsive and should work nicely on iPhones as well. Although,

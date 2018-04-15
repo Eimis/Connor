@@ -21,7 +21,7 @@ urlpatterns = [
     url(
         r'^workout_plans/(?P<pk>\d+)/remove$',
         RemoveWorkoutPlanView.as_view(),
-        name='update_workout_plan'
+        name='remove_workout_plan'
     ),
     url(
         r'^workout_plans/create$',

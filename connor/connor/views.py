@@ -40,7 +40,6 @@ class UpdateWorkoutPlanView(generics.UpdateAPIView):
 
     queryset = WorkoutPlan.objects.all()
     serializer_class = WorkoutPlanSerializer
-    http_method_names = ['patch', ]
 
     def patch(self, request, pk):
         workout_plan = self.get_object()
