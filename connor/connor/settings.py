@@ -131,3 +131,9 @@ STATICFILES_DIRS = [
     os.path.abspath(os.path.join(BASE_DIR, '..', 'bower_components')),
     os.path.abspath(os.path.join(BASE_DIR, '..', 'app')),
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    )
+}
