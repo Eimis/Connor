@@ -20,6 +20,10 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     });
   };
 
+  ////////////////////////////
+  // EDITING WORKOUT PLANS ///
+  ////////////////////////////
+  //
   var workoutPlanEditModalController = function($scope, $uibModalInstance, workout_plan) {
     var $ctrl = this;
 
@@ -69,34 +73,6 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     };
   };
 
-  var workoutPlanCreateModalController = function($scope, $uibModalInstance) {
-    var $ctrl = this;
-
-    //This comes from 'extra_data/' api endpoint:
-    $ctrl.all_users = $scope.all_users;
-    $ctrl.all_exercises = $scope.all_exercises;
-
-    $ctrl.workout_plan = {};
-
-    $ctrl.createWorkoutPlan = function() {
-      $ctrl.errors = [];
-
-      ctrl.model.createData($ctrl.workout_plan).then(function(resp){
-        if (resp.errors) {
-          $ctrl.errors = resp.errors;
-        }
-        if (resp.ok) {
-          $uibModalInstance.dismiss('cancel');
-          syncData();
-        }
-      });
-    };
-
-    $ctrl.cancel = function() {
-      $uibModalInstance.dismiss('cancel');
-    };
-  };
-
   ctrl.openWorkoutPlanEditModal = function(workout_plan) {
     var parentElem = angular.element(document).find('body');
 
@@ -131,6 +107,38 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     });
   };
 
+  ////////////////////////////
+  // CREATING WORKOUT PLANS //
+  ////////////////////////////
+  //
+  var workoutPlanCreateModalController = function($scope, $uibModalInstance) {
+    var $ctrl = this;
+
+    //This comes from 'extra_data/' api endpoint:
+    $ctrl.all_users = $scope.all_users;
+    $ctrl.all_exercises = $scope.all_exercises;
+
+    $ctrl.workout_plan = {};
+
+    $ctrl.createWorkoutPlan = function() {
+      $ctrl.errors = [];
+
+      ctrl.model.createData($ctrl.workout_plan).then(function(resp){
+        if (resp.errors) {
+          $ctrl.errors = resp.errors;
+        }
+        if (resp.ok) {
+          $uibModalInstance.dismiss('cancel');
+          syncData();
+        }
+      });
+    };
+
+    $ctrl.cancel = function() {
+      $uibModalInstance.dismiss('cancel');
+    };
+  };
+
   ctrl.openWorkoutPlanCreateModal = function() {
     var parentElem = angular.element(document).find('body');
 
@@ -147,6 +155,48 @@ var workoutsController = function($rootScope, $scope, $uibModal, workoutsModel) 
     });
 
     editModalInstance.result.then(function() {
+      //console.log('clicked OK')
+    }, function() {
+      //console.log('clicked CANCEL')
+    });
+  };
+
+  ///////////////////////////
+  // VIEWING EXERCISE INFO //
+  ///////////////////////////
+  //
+  var workoutExerciseInfoModalController = function($scope, $uibModalInstance, workout_exercise) {
+    var $ctrl = this;
+
+    $ctrl.workout_exercise = workout_exercise;
+
+    $ctrl.cancel = function() {
+      $uibModalInstance.dismiss('cancel');
+    };
+  };
+
+  ctrl.openWorkoutExerciseInfoModal = function(workout_exercise) {
+    var parentElem = angular.element(document).find('body');
+
+    var uploadModalInstance = $uibModal.open({
+      animation: true,
+      keyboard: false,
+      ariaLabelledBy: 'modal-title',
+      ariaDescribedBy: 'modal-body',
+      templateUrl: 'workoutExerciseInfoModalContent.html',
+      controller: workoutExerciseInfoModalController,
+      scope: $scope, //passed current scope to the modal
+      controllerAs: '$ctrl',
+      appendTo: parentElem,
+      //extra info for modal:
+      resolve: {
+        workout_exercise: function() {
+          return workout_exercise;
+        },
+      }
+    });
+
+    uploadModalInstance.result.then(function() {
       //console.log('clicked OK')
     }, function() {
       //console.log('clicked CANCEL')

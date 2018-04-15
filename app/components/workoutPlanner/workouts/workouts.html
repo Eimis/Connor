@@ -18,8 +18,11 @@
         </span>
       </td>
       <td class="column exercises">
-        <span ng-repeat="exercise in workout_plan.workout_exercises">
-          {{ exercise.name }} {{ $last ? '' : ', ' }}
+        <span
+          ng-repeat="exercise in workout_plan.workout_exercises">
+          <span class="exercise_name" ng-click="$ctrl.openWorkoutExerciseInfoModal(exercise)">
+              {{ exercise.name }}</span> {{ $last ? '' : ', ' }}
+          </span>
         </span>
       </td>
       <td class="column">
@@ -50,6 +53,7 @@
           ng-options="item.pk as item.full_name for item in $ctrl.all_users"
           ng-model="$ctrl.selected_users">
         </select>
+        <small class="form-text text-muted">Hold down "Control", or "Command" on a Mac, to select more than one.</small>
       </div>
       <div class="form-group">
         <label for="workoutPlanExercises">Exercises</label>
@@ -57,6 +61,7 @@
           ng-options="item.pk as item.name for item in $ctrl.all_exercises"
           ng-model="$ctrl.selected_exercises">
         </select>
+        <small class="form-text text-muted">Hold down "Control", or "Command" on a Mac, to select more than one.</small>
       </div>
     </form>
 
@@ -87,6 +92,7 @@
           ng-options="item.pk as item.full_name for item in $ctrl.all_users"
           ng-model="$ctrl.workout_plan.users">
         </select>
+        <small class="form-text text-muted">Hold down "Control", or "Command" on a Mac, to select more than one.</small>
       </div>
       <div class="form-group">
         <label for="workoutPlanExercises">Exercises</label>
@@ -94,6 +100,7 @@
           ng-options="item.pk as item.name for item in $ctrl.all_exercises"
           ng-model="$ctrl.workout_plan.workout_exercises">
         </select>
+        <small class="form-text text-muted">Hold down "Control", or "Command" on a Mac, to select more than one.</small>
       </div>
     </form>
 
@@ -101,5 +108,23 @@
   <div class="modal-footer">
     <button class="btn btn-primary" type="button" ng-click="$ctrl.createWorkoutPlan()">Create</button>
     <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+  </div>
+</script>
+
+<script type="text/ng-template" id="workoutExerciseInfoModalContent.html">
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-title">View exercise info</h3>
+  </div>
+  <div class="modal-body exercise_info" id="modal-body">
+
+    <h5>Name: <b>{{ $ctrl.workout_exercise.name }}</b></h5>
+    <h5>Description: <b>{{ $ctrl.workout_exercise.description }}</b></h5>
+    <h5>Days:
+      <span ng-repeat="week_day in $ctrl.workout_exercise.days"><b>{{ week_day.day }} {{ $last ? '' : ', ' }}</b></span>
+    </h5>
+
+  </div>  <!--/modal body-->
+  <div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Close</button>
   </div>
 </script>

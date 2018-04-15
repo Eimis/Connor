@@ -1,8 +1,21 @@
 from django.contrib.auth.models import User
 
-from connor.models import WorkoutExcercise, WorkoutPlan
+from connor.models import WeekDay, WorkoutExcercise, WorkoutPlan
 
 from rest_framework import serializers
+
+
+class WeekDaySerializer(serializers.ModelSerializer):
+    day = serializers.SerializerMethodField()
+
+    class Meta:
+        model = WeekDay
+        fields = (
+            'day',
+        )
+
+    def get_day(self, obj):
+        return obj.get_day_display()
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -25,6 +38,7 @@ class WorkoutExcerciseSerializer(serializers.ModelSerializer):
     # dabase level:
     name = serializers.CharField()
     description = serializers.CharField()
+    days = WeekDaySerializer(many=True)
 
     class Meta:
         model = WorkoutExcercise
@@ -32,6 +46,7 @@ class WorkoutExcerciseSerializer(serializers.ModelSerializer):
             'pk',
             'name',
             'description',
+            'days',
         )
 
 

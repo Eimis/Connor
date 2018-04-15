@@ -220,6 +220,18 @@ td.exercises {
   padding: 10px 0 10px 40px;
 }
 
+td.exercises span.exercise_name {
+  text-decoration: underline;
+}
+
+td.exercises span.exercise_name:hover {
+  cursor: pointer;
+}
+
+div.exercise_info h5 {
+  padding: 10px 0 10px 0;
+}
+
 span.edit,
 span.delete {
   padding: 5px;
