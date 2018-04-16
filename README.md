@@ -67,7 +67,7 @@ Key points:
    default fancy inerface for that (`http://localhost:8000/#/`)
    * Django rest framework's default browsable HTML API is disabled because nested
    serializer fields are not supported by it anyway
-   * At this point, you can only edit `Users` and `WorkoutPlan`s via Django
+   * At this point, you can only edit `Users` and `WorkoutExercise`s via Django
    admin (`http://localhost:8000/admin/`, `superuser` / `superuser`). Although,
    the main app interface displays `WorkoutExercise` info (name, description, assigned week
    days)
