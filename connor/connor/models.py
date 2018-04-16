@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.exceptions import ValidationError
 
@@ -11,6 +12,31 @@ class WorkoutPlan(models.Model):
 
     def __str__(self):
         return self.name
+
+
+# Notify User that he has been added to the WorkoutPlan:
+def workout_plan_users_changed(sender, **kwargs):
+    action = kwargs['action']
+    user_ids = kwargs['pk_set']
+
+    if action == 'post_add' and user_ids:
+        for user_id in user_ids:
+            user = User.objects.get(pk=user_id)
+
+            # this is just for demo purposes:
+            send_mail(
+                'You have been asigned to a WorkoutPlan!',
+                'Hello. You have been asigned to a WorkoutPlan!',
+                'connor@example.com',
+                [user.email],
+                fail_silently=False,
+            )
+
+
+models.signals.m2m_changed.connect(
+    workout_plan_users_changed,
+    sender=WorkoutPlan.users.through
+)
 
 
 @python_2_unicode_compatible

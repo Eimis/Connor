@@ -72,6 +72,9 @@ Key points:
    the main app interface displays `WorkoutExercise` info (name, description, assigned week
    days)
    * At this point no API endpoint requires authentication
+   * When User is asigned to a Workout plan, he gets an email notification.
+     So far `django.core.mail.backends.console.EmailBackend` is used for that,
+     so an email is printed to the console's stdout
 
 * Tests:
 
